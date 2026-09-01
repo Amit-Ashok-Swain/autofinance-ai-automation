@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { sound } from "../utils/sound";
 import {
   Car,
@@ -42,9 +42,9 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
 
   const navItems = [
     { id: "billing", label: "Billing", keyNum: "1", icon: Car },
-    { id: "financier", label: "Financier Recon", keyNum: "2", icon: DollarSign },
-    { id: "workshop", label: "Service & Spares", keyNum: "3", icon: Wrench },
-    { id: "oem", label: "OEM Rebates", keyNum: "4", icon: Building2 },
+    { id: "financier", label: "Financier", keyNum: "2", icon: DollarSign },
+    { id: "workshop", label: "Workshop", keyNum: "3", icon: Wrench },
+    { id: "oem", label: "OEM Claims", keyNum: "4", icon: Building2 },
     { id: "gst", label: "GST 3-Way", keyNum: "5", icon: Receipt },
     { id: "gatepass", label: "Gate-Pass", keyNum: "6", icon: ShieldCheck },
     { id: "capital", label: "Cash Flow", keyNum: "7", icon: TrendingUp },
@@ -64,9 +64,9 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
 
   return (
     <header className="sticky top-0 z-50 bg-[#060b14]/95 backdrop-blur-2xl border-b border-slate-800/80 shadow-2xl">
-      {/* Top Telemetry Strip */}
-      <div className="hidden lg:flex items-center justify-between px-6 lg:px-10 py-1.5 bg-[#03070f] border-b border-slate-900 text-[11px] font-mono text-slate-400">
-        <div className="flex items-center gap-4">
+      {/* Top Telemetry Strip (Desktop / TV) */}
+      <div className="hidden lg:flex items-center justify-between px-4 sm:px-6 lg:px-8 py-1.5 bg-[#03070f] border-b border-slate-900 text-[11px] font-mono text-slate-400">
+        <div className="flex items-center gap-3">
           <span className="flex items-center gap-1.5 text-emerald-400 font-semibold">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
             LIVE TELEMETRY: 4 DEALERSHIP HUBS ONLINE
@@ -77,38 +77,38 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
           <span className="text-cyan-400">RUN-RATE: ₹12.50 CR/MO</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="text-slate-400">HOTKEYS: <kbd className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">1-7</kbd> MODULES • <kbd className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">⌘K</kbd> COPILOT</span>
+          <span>SHORTCUTS: <kbd className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">1-7</kbd> MODULES • <kbd className="px-1.5 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800">⌘K</kbd> COPILOT</span>
           <span className="text-slate-700">•</span>
           <span className="text-amber-400 font-bold">{time} IST</span>
         </div>
       </div>
 
-      {/* Main Bar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between gap-4">
-        {/* Brand Logo & Title */}
-        <div className="flex items-center gap-3 shrink-0">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-amber-400 p-0.5 shadow-lg shadow-emerald-500/20 flex items-center justify-center">
+      {/* Main Navigation Bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-18 flex items-center justify-between gap-2 sm:gap-4">
+        {/* Brand Logo & Identity */}
+        <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-br from-emerald-400 via-teal-500 to-amber-400 p-0.5 shadow-lg shadow-emerald-500/20 flex items-center justify-center">
             <div className="w-full h-full bg-[#071120] rounded-[14px] flex items-center justify-center text-emerald-400">
-              <Car className="w-5 h-5" />
+              <Car className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="font-black text-white text-base sm:text-lg tracking-tight font-sans">
-                AUTOFINANCE <span className="text-emerald-400 font-mono">AI™</span>
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <h1 className="font-black text-white text-sm sm:text-base tracking-tight font-sans">
+                AUTOFINANCE <span className="text-emerald-400 font-mono text-xs sm:text-sm">AI™</span>
               </h1>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              <span className="hidden sm:inline-flex px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
                 DEALERSHIP OS
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono hidden sm:block">
+            <p className="text-[10px] sm:text-[11px] text-slate-400 font-mono hidden md:block">
               Apex Motors Group • Amit Ashok Swain (Accounts GM)
             </p>
           </div>
         </div>
 
-        {/* Center Segmented Nav Tabs (Desktop) */}
-        <nav className="hidden 2xl:flex items-center gap-1 bg-[#091122] p-1.5 rounded-2xl border border-slate-800 shadow-inner">
+        {/* Center Segmented Nav Tabs (Visible strictly on Desktop & TV: lg and up) */}
+        <nav className="hidden lg:flex items-center gap-1 bg-[#091122] p-1 rounded-2xl border border-slate-800/90 shadow-inner">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -116,7 +116,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
               <button
                 key={item.id}
                 onClick={() => handleSelectTab(item.id)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
+                className={`flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                   isActive
                     ? "bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/25"
                     : "text-slate-300 hover:text-white hover:bg-slate-800/80"
@@ -124,7 +124,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
               >
                 <Icon className={`w-3.5 h-3.5 ${isActive ? "text-slate-950" : "text-emerald-400"}`} />
                 <span>{item.label}</span>
-                <span className={`text-[10px] font-mono px-1 py-0.2 rounded ml-0.5 ${isActive ? "bg-slate-950/30 text-slate-950 font-black" : "text-slate-500"}`}>
+                <span className={`text-[9px] font-mono px-1 py-0.2 rounded ml-0.5 ${isActive ? "bg-slate-950/30 text-slate-950 font-black" : "text-slate-500"}`}>
                   {item.keyNum}
                 </span>
               </button>
@@ -133,59 +133,63 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
         </nav>
 
         {/* Right Action Controls */}
-        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          {/* AI Copilot Button */}
           <button
             onClick={() => {
               sound.playMilestone();
               onOpenAiModal();
             }}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-500/30 text-xs font-bold transition-all shadow-md shadow-emerald-500/10 cursor-pointer h-10"
+            className="flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-500/30 text-xs font-bold transition-all shadow-md shadow-emerald-500/10 cursor-pointer h-9 sm:h-10"
             title="Dealership AI Financial Advisor (⌘K)"
           >
             <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
             <span className="hidden sm:inline">AI Copilot</span>
-            <span className="sm:hidden">Copilot</span>
-            <kbd className="hidden lg:inline text-[9px] font-mono bg-emerald-950/80 px-1.5 py-0.5 rounded text-emerald-400 border border-emerald-500/30">
+            <span className="sm:hidden">AI</span>
+            <kbd className="hidden xl:inline text-[9px] font-mono bg-emerald-950/80 px-1.5 py-0.5 rounded text-emerald-400 border border-emerald-500/30">
               ⌘K
             </kbd>
           </button>
 
+          {/* Dossier Report */}
           <button
             onClick={() => {
               sound.playClick();
               onOpenDossier();
             }}
-            className="hidden md:flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-mono transition-all cursor-pointer h-10"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 sm:py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs font-mono transition-all cursor-pointer h-9 sm:h-10"
             title="Export Dealership Dossier (⌘D)"
           >
             <FileText className="w-3.5 h-3.5 text-amber-400" />
-            <span>Dossier</span>
+            <span className="hidden md:inline">Dossier</span>
           </button>
 
+          {/* Sound Mute Toggle */}
           <button
             onClick={handleToggleMute}
-            className="p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all cursor-pointer h-10 w-10 flex items-center justify-center"
+            className="p-2 sm:p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 transition-all cursor-pointer h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center"
             title={isMuted ? "Unmute Sound (M)" : "Mute Sound (M)"}
           >
             {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4 text-emerald-400" />}
           </button>
 
+          {/* Mobile/Tablet Hamburger Trigger (STRICTLY lg:hidden - never visible on desktop!) */}
           <button
             onClick={() => {
               sound.playClick();
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="2xl:hidden p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-all cursor-pointer h-10 w-10 flex items-center justify-center"
-            aria-label="Toggle Menu"
+            className="lg:hidden p-2 sm:p-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 transition-all cursor-pointer h-9 w-9 sm:h-10 sm:w-10 flex items-center justify-center"
+            aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-emerald-400" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Horizontal Scrollable Tabs on Desktop & Tablets (< 2xl) */}
-      <div className="2xl:hidden border-t border-slate-800/80 bg-[#071120] px-4 py-2 overflow-x-auto scrollbar-none">
-        <div className="flex items-center gap-2 min-w-max">
+      {/* Horizontal Swipeable Tab Pill Row on Mobile/Tablet (< lg) */}
+      <div className="lg:hidden border-t border-slate-800/80 bg-[#071120] px-3 py-2 overflow-x-auto scrollbar-none">
+        <div className="flex items-center gap-1.5 min-w-max">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -207,12 +211,12 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
         </div>
       </div>
 
-      {/* Expandable Hamburger Drawer */}
+      {/* Expandable Hamburger Drawer on Mobile/Tablet (< lg) */}
       {mobileMenuOpen && (
-        <div className="2xl:hidden border-t border-emerald-500/20 bg-[#050a14] p-4 space-y-3 shadow-2xl animate-fadeIn">
+        <div className="lg:hidden border-t border-emerald-500/20 bg-[#050a14] p-4 space-y-3 shadow-2xl animate-fadeIn">
           <div className="flex items-center justify-between text-xs font-mono text-slate-400 px-1 border-b border-slate-800 pb-2">
-            <span>FINANCE & ACCOUNTS MODULES</span>
-            <span className="text-emerald-400">AMIT ASHOK SWAIN</span>
+            <span>DEALERSHIP FINANCE MODULES</span>
+            <span className="text-emerald-400">AMIT ASHOK SWAIN (GM)</span>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -254,7 +258,7 @@ export default function Navbar({ activeTab, setActiveTab, onOpenAiModal, onOpenD
               className="flex-1 py-2.5 rounded-xl bg-slate-900 text-slate-200 border border-slate-800 text-xs font-mono flex items-center justify-center gap-2 cursor-pointer"
             >
               <FileText className="w-3.5 h-3.5 text-amber-400" />
-              <span>Export Dealership Dossier</span>
+              <span>Export Dealership Dossier PDF</span>
             </button>
           </div>
         </div>
