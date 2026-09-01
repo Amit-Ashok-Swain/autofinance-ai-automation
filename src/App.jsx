@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import HeaderHero from "./components/HeaderHero";
 import VehicleBillingStudio from "./components/VehicleBillingStudio";
@@ -10,14 +10,53 @@ import MakerCheckerGatePass from "./components/MakerCheckerGatePass";
 import CashFlowWorkingCapital from "./components/CashFlowWorkingCapital";
 import AiFinanceCopilotModal from "./components/AiFinanceCopilotModal";
 import PrintableDealershipDossier from "./components/PrintableDealershipDossier";
+import { sound } from "./utils/sound";
 
 export default function App() {
   const [activeTab, setActiveTab] = useState("billing");
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [isDossierOpen, setIsDossierOpen] = useState(false);
 
+  // Global Keyboard Shortcuts (1-7 for modules, ⌘K for Copilot, ⌘D for Dossier, M for Mute)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const isInputting =
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA" ||
+        document.activeElement?.tagName === "SELECT";
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        sound.playMilestone();
+        setIsAiModalOpen((prev) => !prev);
+        return;
+      }
+
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "d") {
+        e.preventDefault();
+        sound.playClick();
+        setIsDossierOpen((prev) => !prev);
+        return;
+      }
+
+      if (isInputting) return;
+
+      if (e.key === "1") { sound.playClick(); setActiveTab("billing"); }
+      else if (e.key === "2") { sound.playClick(); setActiveTab("financier"); }
+      else if (e.key === "3") { sound.playClick(); setActiveTab("workshop"); }
+      else if (e.key === "4") { sound.playClick(); setActiveTab("oem"); }
+      else if (e.key === "5") { sound.playClick(); setActiveTab("gst"); }
+      else if (e.key === "6") { sound.playClick(); setActiveTab("gatepass"); }
+      else if (e.key === "7") { sound.playClick(); setActiveTab("capital"); }
+      else if (e.key.toLowerCase() === "m") { sound.toggleMute(); }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#050911] text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-black">
+    <div className="min-h-screen bg-[#050911] text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-black antialiased">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -25,11 +64,11 @@ export default function App() {
         onOpenDossier={() => setIsDossierOpen(true)}
       />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-8 py-8 space-y-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
         <HeaderHero onSelectModule={(tabId) => setActiveTab(tabId)} />
 
-        {/* Module Views */}
-        <div className="relative">
+        {/* Active Module View */}
+        <div className="relative animate-fadeIn">
           {activeTab === "billing" && <VehicleBillingStudio />}
           {activeTab === "financier" && <FinancierPayoutRecon />}
           {activeTab === "workshop" && <WorkshopServiceBilling />}
@@ -51,11 +90,11 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950/80 py-6 px-4 text-center text-xs text-slate-500 font-mono">
+      <footer className="border-t border-slate-800/80 bg-slate-950 py-6 px-4 text-center text-xs text-slate-400 font-mono space-y-1">
         <p>
-          AutoFinance AI™ • Automobile Dealership Accounts & Financial Automation Platform
+          AutoFinance AI™ • Multi-Location Automotive Dealership Finance & Accounts Automation
         </p>
-        <p className="text-slate-400 mt-1">
+        <p className="text-slate-500">
           Designed by Amit Ashok Swain — Head of Finance Operations & Accounts General Manager
         </p>
       </footer>
