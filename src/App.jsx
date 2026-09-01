@@ -17,7 +17,6 @@ export default function App() {
   const [isAiModalOpen, setIsAiModalOpen] = useState(false);
   const [isDossierOpen, setIsDossierOpen] = useState(false);
 
-  // Global Keyboard Shortcuts (1-7 for modules, ⌘K for Copilot, ⌘D for Dossier, M for Mute)
   useEffect(() => {
     const handleKeyDown = (e) => {
       const isInputting =
@@ -56,7 +55,7 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#050911] text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-black antialiased">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#050911] text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-black antialiased">
       <Navbar
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -64,11 +63,11 @@ export default function App() {
         onOpenDossier={() => setIsDossierOpen(true)}
       />
 
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8">
+      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-8 overflow-x-hidden">
         <HeaderHero onSelectModule={(tabId) => setActiveTab(tabId)} />
 
         {/* Active Module View */}
-        <div className="relative animate-fadeIn">
+        <div className="relative animate-fadeIn w-full overflow-x-hidden">
           {activeTab === "billing" && <VehicleBillingStudio />}
           {activeTab === "financier" && <FinancierPayoutRecon />}
           {activeTab === "workshop" && <WorkshopServiceBilling />}
@@ -90,7 +89,7 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/80 bg-slate-950 py-6 px-4 text-center text-xs text-slate-400 font-mono space-y-1">
+      <footer className="border-t border-slate-800/80 bg-slate-950 py-6 px-4 text-center text-xs text-slate-400 font-mono space-y-1 w-full">
         <p>
           AutoFinance AI™ • Multi-Location Automotive Dealership Finance & Accounts Automation
         </p>
